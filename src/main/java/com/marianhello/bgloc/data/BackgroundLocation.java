@@ -919,6 +919,9 @@ public class BackgroundLocation implements Parcelable {
         if ("@longitude".equals(key)) {
             return longitude;
         }
+        if ("@latitude,@longitude".equals(key)) {
+            return String.format(Locale.US, "%f,%f", latitude, longitude);
+        }
         if ("@accuracy".equals(key)) {
             return hasAccuracy ? accuracy : JSONObject.NULL;
         }

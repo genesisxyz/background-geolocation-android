@@ -128,6 +128,8 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
     private static LocationTransform sLocationTransform;
     private static LocationProviderFactory sLocationProviderFactory;
 
+    private BackgroundLocation lastLocation = null;
+
     private class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -686,9 +688,13 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
 
     private BackgroundLocation transformLocation(BackgroundLocation location) {
         if (sLocationTransform != null) {
-            return sLocationTransform.transformLocationBeforeCommit(this, location);
+            BackgroundLocation lastLocation = sLocationTransform.transformLocationBeforeCommit(this, this.lastLocation, location);
+            if (lastLocation != null) {
+                this.lastLocation = lastLocation;
+            }
+            return lastLocation;
         }
-
+        this.lastLocation = location;
         return location;
     }
 

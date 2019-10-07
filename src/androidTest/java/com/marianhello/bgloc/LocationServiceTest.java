@@ -233,7 +233,7 @@ public class LocationServiceTest {
         LocationServiceImpl.setLocationTransform(new LocationTransform() {
             @Nullable
             @Override
-            public BackgroundLocation transformLocationBeforeCommit(@NonNull Context context, @NonNull BackgroundLocation location) {
+            public BackgroundLocation transformLocationBeforeCommit(@NonNull Context context, BackgroundLocation lastLocation, @NonNull BackgroundLocation location) {
                 location.setAltitude(8848.0);
                 return location;
             }

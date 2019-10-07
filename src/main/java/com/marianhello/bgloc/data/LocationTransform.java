@@ -12,10 +12,11 @@ public interface LocationTransform
      * Return a <code>BackgroundLocation</code>, either a new one or the same one after modification.
      * Return <code>null</code> to prevent this location from being committed.
      * @param context
+     * @param lastLocation - the previous location
      * @param location - the input location
      * @return the location that you want to actually commit
      */
 
     @Nullable
-    BackgroundLocation transformLocationBeforeCommit(@NonNull Context context, @NonNull BackgroundLocation location);
+    BackgroundLocation transformLocationBeforeCommit(@NonNull Context context, BackgroundLocation lastLocation, @NonNull BackgroundLocation location);
 }
